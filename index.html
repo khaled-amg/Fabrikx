@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FABRIKX — De l'idée au produit en ligne en 7 jours</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #181818;
+      --border: #222222;
+      --text: #f0f0f0;
+      --muted: #888888;
+      --accent: #ff3c00;
+      --accent2: #ff6a3d;
+      --white: #ffffff;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── IMPORT FONT ─── */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--accent2) !important; color: var(--white) !important; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,60,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,60,0,0.1);
+      border: 1px solid rgba(255,60,0,0.25);
+      color: var(--accent2);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-badge::before { content: '⚡'; }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .hero-sub strong { color: var(--text); }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      border-color: #444;
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 72px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--white);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 100px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+
+    /* ─── OFFRES ─── */
+    #offres { background: var(--bg2); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: #333;
+      transform: translateY(-4px);
+    }
+
+    .card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: -12px; left: 32px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .card-price {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .card-price span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .card-features {
+      list-style: none;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-features li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card .btn-primary,
+    .card .btn-secondary {
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ─── PROCESS ─── */
+    #process { background: var(--bg); }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 700px;
+    }
+
+    .step {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% + 8px);
+      background: var(--border);
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content {
+      padding: 8px 0 48px;
+    }
+
+    .step-content h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ─── POUR QUI ─── */
+    #pourqui { background: var(--bg2); }
+
+    .targets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .target {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .target:hover { border-color: #333; }
+
+    .target-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .target h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .target p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── PROJETS ─── */
+    #projets { background: var(--bg); }
+
+    .projets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .projet-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .projet-card:hover {
+      border-color: #333;
+      transform: translateY(-4px);
+    }
+
+    .projet-thumb {
+      background: linear-gradient(135deg, #1a1a1a, #222);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .projet-info {
+      padding: 24px;
+    }
+
+    .projet-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .projet-info h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .projet-info p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* ─── CTA FINAL ─── */
+    #cta {
+      background: var(--bg2);
+      text-align: center;
+    }
+
+    #cta h2 {
+      max-width: 640px;
+      margin: 0 auto 20px;
+    }
+
+    #cta .section-sub {
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    footer .logo {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .projet-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .projet-link:hover { color: var(--accent2); }
+
+    /* ─── CTA OFFERS ─── */
+    .cta-offers {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .cta-offer-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      min-width: 180px;
+      transition: border-color 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .cta-offer-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .cta-offer-icon { font-size: 28px; }
+    .cta-offer-name { font-size: 15px; font-weight: 700; color: var(--white); }
+    .cta-offer-price { font-size: 24px; font-weight: 900; color: var(--accent); }
+    .cta-offer-btn { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .cta-offer-card:hover .cta-offer-btn { color: var(--accent); }
+    .cta-guarantee { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--bg); }
+    .faq-list { max-width: 720px; display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%; background: none; border: none; color: var(--white);
+      font-size: 16px; font-weight: 600; font-family: var(--font);
+      text-align: left; padding: 22px 0; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--accent2); }
+    .faq-chevron { color: var(--muted); font-size: 18px; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(45deg); color: var(--accent); }
+    .faq-answer {
+      color: var(--muted); font-size: 15px; line-height: 1.75;
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 22px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      nav ul { display: none; }
+      section { padding: 72px 20px; }
+      .hero-stats { gap: 32px; }
+      .cta-offers { flex-direction: column; align-items: center; }
+      .cta-offer-card { width: 100%; max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">FABRIK<span>X</span></div>
+    <ul>
+      <li><a href="#offres">Offres</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#cta" class="nav-cta">Lancer mon projet</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge">Livraison en 7 jours</div>
+    <h1>De l'idée au produit<br />en ligne en <span>7 jours.</span></h1>
+    <p class="hero-sub">
+      FABRIKX crée ton SaaS ou ta boutique e-commerce.<br />
+      <strong>Vite. Bien. Sans bullshit.</strong>
+    </p>
+    <div class="btn-group">
+      <a href="#cta" class="btn-primary">Lancer mon projet</a>
+      <a href="#offres" class="btn-secondary">Voir les offres</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">7j</div>
+        <div class="stat-label">Délai de livraison</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">299€</div>
+        <div class="stat-label">Pour démarrer</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5min</div>
+        <div class="stat-label">Pour nous briefer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRES -->
+  <section id="offres">
+    <div class="container">
+      <div class="section-label">Offres</div>
+      <h2>Ce qu'on construit pour toi</h2>
+      <p class="section-sub">Des offres packagées, claires, sans surprise.</p>
+      <div class="cards">
+
+        <div class="card featured">
+          <div class="card-badge">Le plus populaire</div>
+          <div class="card-icon">🚀</div>
+          <h3>SaaS MVP</h3>
+          <div class="card-price">999€ <span>/ projet</span></div>
+          <p>Tu as une idée. On la transforme en produit fonctionnel. Prêt à tester avec tes premiers utilisateurs.</p>
+          <ul class="card-features">
+            <li>Authentification + dashboard</li>
+            <li>Base de données incluse</li>
+            <li>Déploiement complet</li>
+            <li>Livraison en 7 jours</li>
+          </ul>
+          <a href="#cta" class="btn-primary">Lancer mon SaaS</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <h3>Boutique E-commerce</h3>
+          <div class="card-price">599€ <span>/ projet</span></div>
+          <p>Un produit à vendre. On te construit la boutique qui convertit. Prête à encaisser dès le jour 1.</p>
+          <ul class="card-features">
+            <li>Pages produits optimisées</li>
+            <li>Paiement en ligne configuré</li>
+            <li>Setup complet</li>
+            <li>Livraison rapide</li>
+          </ul>
+          <a href="#cta" class="btn-secondary">Lancer ma boutique</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Site Vitrine</h3>
+          <div class="card-price">299€ <span>/ projet</span></div>
+          <p>Une présence pro en ligne. Rapide, moderne, efficace. Parfait pour te lancer ou crédibiliser ton activité.</p>
+          <ul class="card-features">
+            <li>Design moderne sur mesure</li>
+            <li>Optimisé conversion</li>
+            <li>Responsive mobile</li>
+            <li>Livraison express</li>
+          </ul>
+          <a href="#cta" class="btn-secondary">Créer mon site</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <div class="section-label">Process</div>
+      <h2>Simple comme bonjour.</h2>
+      <p class="section-sub">Pas de réunions interminables. Pas d'allers-retours sans fin.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Tu choisis ton offre</h4>
+            <p>SaaS, e-commerce ou site vitrine — tu sais ce qu'il te faut.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Tu paies en ligne</h4>
+            <p>Sécurisé, immédiat. Pas de devis, pas d'attente.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Tu remplis un formulaire</h4>
+            <p>5 minutes. On te pose les bonnes questions pour démarrer.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>On construit ton projet</h4>
+            <p>Process rodé, zéro allers-retours inutiles. Tu peux souffler.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Tu reçois ton produit</h4>
+            <p>Livré en 7 jours. Prêt à être lancé. Pour de vrai.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POUR QUI -->
+  <section id="pourqui">
+    <div class="container">
+      <div class="section-label">Pour qui</div>
+      <h2>FABRIKX est fait pour toi si…</h2>
+      <p class="section-sub">Tu te reconnais dans l'un de ces profils.</p>
+      <div class="targets">
+        <div class="target">
+          <div class="target-icon">💡</div>
+          <div>
+            <h4>Tu as une idée de SaaS</h4>
+            <p>Pas de dev, pas de budget agence. Tu veux tester vite si ça marche.</p>
+          </div>
+        </div>
+        <div class="target">
+          <div class="target-icon">📦</div>
+          <div>
+            <h4>Tu veux vendre en ligne</h4>
+            <p>Tu as un produit. Tu veux une boutique qui convertit sans te perdre dans la technique.</p>
+          </div>
+        </div>
+        <div class="target">
+          <div class="target-icon">🎯</div>
+          <div>
+            <h4>Tu cherches une présence pro</h4>
+            <p>Freelance, coach, consultant — tu veux crédibiliser ton activité rapidement.</p>
+          </div>
+        </div>
+        <div class="target">
+          <div class="target-icon">⚡</div>
+          <div>
+            <h4>Tu veux tester avant d'investir</h4>
+            <p>Un MVP pour valider ton idée avant de mettre 10k sur la table.</p>
+          </div>
+        </div>
+        <div class="target">
+          <div class="target-icon">🔥</div>
+          <div>
+            <h4>Tu en as marre des agences</h4>
+            <p>Lentes, chères, et qui livrent un brief PowerPoint au bout de 3 semaines.</p>
+          </div>
+        </div>
+        <div class="target">
+          <div class="target-icon">🚀</div>
+          <div>
+            <h4>Tu veux aller vite</h4>
+            <p>Idée ce mois-ci → produit en ligne le mois prochain. C'est ton rythme.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2>Les vraies questions.</h2>
+      <p class="section-sub">Ce que tout le monde veut savoir avant de commander.</p>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            C'est quoi exactement un "MVP" ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            Un MVP (Minimum Viable Product), c'est la version la plus simple de ton produit qui permet de le tester avec de vrais utilisateurs. Pas une maquette, pas une démo — un vrai produit fonctionnel, avec authentification, base de données et toutes les fonctionnalités essentielles. Juste sans les features secondaires qu'on construira après validation.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Qu'est-ce qui est inclus dans chaque offre ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <strong style="color: var(--text);">SaaS MVP (499€)</strong> : authentification utilisateur, dashboard, base de données, déploiement sur ton domaine, 1 fonctionnalité principale.<br/><br/>
+            <strong style="color: var(--text);">E-commerce (199€)</strong> : pages produits, panier, paiement en ligne (Stripe), confirmation email, déploiement complet.<br/><br/>
+            <strong style="color: var(--text);">Site vitrine (99€)</strong> : design sur mesure, toutes les sections nécessaires (hero, offres, contact), responsive mobile, déploiement.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Est-ce que je possède le code à la fin ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui, à 100%. Le code source t'appartient entièrement. Tu reçois un accès complet au repo GitHub + les accès à tous les services déployés (hébergement, base de données, etc.). Pas de dépendance envers nous après la livraison.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Et si le résultat ne correspond pas à mes attentes ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            On fait une révision incluse dans chaque offre pour s'assurer que le produit correspond à ton brief. C'est pour ça que le formulaire de brief est important — plus c'est précis, plus le résultat colle à ta vision. On s'engage sur la qualité, pas sur les excuses.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Je n'ai aucune compétence technique. C'est un problème ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            Pas du tout — c'est même pour ça que FABRIKX existe. Tu décris ton projet en français simple dans un formulaire de 5 minutes. On traduit ça en produit technique. La seule chose qu'on te demande : avoir une idée claire de ce que tu veux construire.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Peut-on faire évoluer le produit après livraison ?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui. La livraison initiale couvre la V1. Pour les évolutions, on peut soit te proposer un devis au projet, soit travailler avec toi en format mensuel. Et comme le code t'appartient, tu peux aussi le confier à n'importe quel dev si tu préfères.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="container">
+      <div class="section-label">Projets</div>
+      <h2>Ce qu'on a déjà construit.</h2>
+      <p class="section-sub">Pas de promesses. Des produits en ligne, utilisés par de vrais utilisateurs.</p>
+      <div class="projets-grid">
+
+        <div class="projet-card">
+          <a href="https://recoltt.fr/" target="_blank" rel="noopener" style="text-decoration:none;">
+            <div class="projet-thumb" style="background: linear-gradient(135deg, #0a1a0f, #0d2b16);">
+              <span style="font-size:30px; font-weight:900; letter-spacing:0.06em; color:#2ecc71;">RECOLTT</span>
+            </div>
+          </a>
+          <div class="projet-info">
+            <div class="projet-tag">SaaS</div>
+            <h4>Recoltt</h4>
+            <p>La plateforme de conduite d'activité pour les sous-traitants fibre optique. Saisie mobile pour les techs, rapprochement automatique des récaps DO, réclamations en un clic.</p>
+            <a href="https://recoltt.fr/" target="_blank" rel="noopener" class="projet-link">Voir le projet →</a>
+          </div>
+        </div>
+
+        <div class="projet-card">
+          <a href="https://www.izibuy.fr/" target="_blank" rel="noopener" style="text-decoration:none;">
+            <div class="projet-thumb" style="background: linear-gradient(135deg, #0a0f1a, #101828);">
+              <span style="font-size:30px; font-weight:900; letter-spacing:0.06em; color:#3b9eff;">IZIBUY</span>
+            </div>
+          </a>
+          <div class="projet-info">
+            <div class="projet-tag">E-commerce</div>
+            <h4>Izibuy</h4>
+            <p>Marketplace télécom : vente de matériel neuf et occasion, annonces, offres d'emploi et formations en ligne dédiées au secteur télécom.</p>
+            <a href="https://www.izibuy.fr/" target="_blank" rel="noopener" class="projet-link">Voir le projet →</a>
+          </div>
+        </div>
+
+        <div class="projet-card">
+          <div class="projet-thumb" style="background: linear-gradient(135deg, #1a0a00, #2a1000);">
+            <span style="font-size:30px; font-weight:900; letter-spacing:0.08em; color:#ff3c00;">FX</span>
+          </div>
+          <div class="projet-info">
+            <div class="projet-tag">Site vitrine</div>
+            <h4>FABRIKX — ce site</h4>
+            <p>Conçu, designé et codé en une session. Landing page complète, 7 sections, responsive. Exactement ce qu'on livre.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta">
+    <div class="container">
+      <div class="section-label">Démarrer</div>
+      <h2>Ton projet commence aujourd'hui.</h2>
+      <p class="section-sub">
+        Choisis ton offre. Paye en ligne. Remplis le brief en 5 minutes.<br />
+        On s'occupe du reste. <strong style="color: var(--text);">Livré en 7 jours.</strong>
+      </p>
+      <div class="cta-offers">
+        <a href="https://buy.stripe.com/saas" class="cta-offer-card">
+          <div class="cta-offer-icon">🚀</div>
+          <div class="cta-offer-name">SaaS MVP</div>
+          <div class="cta-offer-price">999€</div>
+          <div class="cta-offer-btn">Choisir →</div>
+        </a>
+        <a href="https://buy.stripe.com/ecom" class="cta-offer-card">
+          <div class="cta-offer-icon">🛍️</div>
+          <div class="cta-offer-name">E-commerce</div>
+          <div class="cta-offer-price">599€</div>
+          <div class="cta-offer-btn">Choisir →</div>
+        </a>
+        <a href="https://buy.stripe.com/vitrine" class="cta-offer-card cta-offer-start">
+          <div class="cta-offer-icon">⚡</div>
+          <div class="cta-offer-name">Site vitrine</div>
+          <div class="cta-offer-price">299€</div>
+          <div class="cta-offer-btn">Choisir →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">FABRIK<span>X</span></span>
+    <p>Build. Launch. Scale. — © 2025 FABRIKX</p>
+  </footer>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
