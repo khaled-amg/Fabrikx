@@ -554,6 +554,135 @@
     }
     .projet-link:hover { color: var(--accent2); }
 
+    /* ─── RANKX ─── */
+    #rankx { background: var(--bg2); }
+
+    .rankx-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width: 768px) { .rankx-intro { grid-template-columns: 1fr; gap: 32px; } }
+
+    .rankx-brand {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .rankx-brand span { color: var(--accent); }
+
+    .rankx-tagline {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .rankx-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rankx-features li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rankx-features li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .rankx-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .rankx-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .rankx-card:hover { border-color: #333; transform: translateY(-4px); }
+    .rankx-card.featured { border-color: var(--accent); position: relative; }
+
+    .rankx-plan {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .rankx-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .rankx-price {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--white);
+      margin: 16px 0;
+    }
+
+    .rankx-price span { font-size: 16px; font-weight: 500; color: var(--muted); }
+
+    .rankx-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .rankx-list {
+      list-style: none;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rankx-list li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .rankx-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
     /* ─── CTA OFFERS ─── */
     .cta-offers {
       display: flex;
@@ -623,6 +752,7 @@
     <div class="logo">FABRIK<span>X</span></div>
     <ul>
       <li><a href="#offres">Offres</a></li>
+      <li><a href="#rankx">RANKX</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#projets">Projets</a></li>
@@ -808,6 +938,50 @@
             <p>Idée ce mois-ci → produit en ligne le mois prochain. C'est ton rythme.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKX -->
+  <section id="rankx">
+    <div class="container">
+      <div class="section-label">Nouveau produit</div>
+      <h2>Monte dans Google.<br />En automatique.</h2>
+      <p class="section-sub">Du contenu SEO publié chaque semaine sur ton site. Sans rédacteur. Sans agence. Sans toi.</p>
+
+      <div class="rankx-cards">
+
+        <div class="rankx-card">
+          <div class="rankx-plan">Starter</div>
+          <h3>RANKX Starter</h3>
+          <div class="rankx-price">29€ <span>/ mois</span></div>
+          <p class="rankx-desc">Tu prends en main ton SEO. On te donne l'outil, tu publies quand tu veux.</p>
+          <ul class="rankx-list">
+            <li>Accès à l'outil RANKX</li>
+            <li>Contenu SEO illimité</li>
+            <li>Publication automatique sur ton site</li>
+            <li>Jusqu'à 3 sites</li>
+            <li>Support par email</li>
+          </ul>
+          <a href="#cta" class="btn-secondary" style="text-align:center;">Démarrer avec Starter</a>
+        </div>
+
+        <div class="rankx-card featured">
+          <div class="card-badge">Recommandé</div>
+          <div class="rankx-plan">Pro</div>
+          <h3>RANKX Pro</h3>
+          <div class="rankx-price">99€ <span>/ mois</span></div>
+          <p class="rankx-desc">On gère tout. Tu te concentres sur ton business, on s'occupe de Google.</p>
+          <ul class="rankx-list">
+            <li>Tout ce qui est dans Starter</li>
+            <li>SEO entièrement géré pour toi</li>
+            <li>Rapport mensuel de positionnement</li>
+            <li>Sites illimités</li>
+            <li>Support prioritaire</li>
+          </ul>
+          <a href="#cta" class="btn-primary" style="text-align:center;">Démarrer avec Pro</a>
+        </div>
+
       </div>
     </div>
   </section>
